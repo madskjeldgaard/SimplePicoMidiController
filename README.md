@@ -4,6 +4,8 @@ A simple Raspberry Pi Pico based midi controller that uses the Pico-SDK to make 
 
 It expects the button to be connected to pin 1 (GP0) and pin3 (GND) but you can change this in the code.
 
+The project also includes a simple SuperCollider script set up to receive midi notes from this controller and play a synth accordingly.
+
 ## Build
 
 Before building, you need to clone the pico sdk to your computer somewhere, eg:
