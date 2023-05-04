@@ -9,8 +9,7 @@
 
 // Setup Pin 1 as an input
 constexpr auto button_pin = 0;
-
-auto debouncedButton = Debounce(button_pin, 50);
+auto buttonReadState = gpio_get(button_pin);
 
 // Midi buffer
 constexpr auto buffer_size = 3;
@@ -44,11 +43,21 @@ void sendNoteOff(unsigned int note, unsigned int velocity,
 // This is where the button is being read and the appropriate functions called
 void buttonReadTask() {
 
+  // Read the button state
+  auto newButtonReadState = gpio_get(button_pin);
 
-  if (debouncedButton.rose()) {
-    sendNoteOn(60, 127, 0);
-  } else if (debouncedButton.fell()) {
-    sendNoteOff(60, 127, 0);
+  // If the button state has changed
+  if (newButtonReadState != buttonReadState) {
+    // If the button is pressed
+    if (newButtonReadState == 0) {
+      // Send a note on message
+      sendNoteOn(60, 127, 0);
+    } else {
+      // Send a note off message
+      sendNoteOff(60, 127, 0);
+    }
+
+	buttonReadState = newButtonReadState;
   }
 }
 
@@ -58,7 +67,6 @@ int main() {
   tusb_init();
 
   while (true) {
-	debouncedButton.update();
     buttonReadTask();
     tud_task(); // tinyusb device task
   }
