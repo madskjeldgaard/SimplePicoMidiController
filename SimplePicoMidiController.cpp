@@ -1,5 +1,6 @@
 #include "bsp/board.h"
 #include "hardware/gpio.h"
+#include "include/DebounceButton.hpp"
 #include "pico/stdlib.h"
 
 #include "tusb.h"
@@ -8,7 +9,8 @@
 
 // Setup Pin 1 as an input
 constexpr auto button_pin = 0;
-auto buttonReadState = gpio_get(button_pin);
+auto debounceButton =
+    PicoDebounceButton(button_pin, 10, PicoDebounceButton::PRESSED, false);
 
 // Midi buffer
 constexpr auto buffer_size = 3;
@@ -43,20 +45,18 @@ void sendNoteOff(unsigned int note, unsigned int velocity,
 void buttonReadTask() {
 
   // Read the button state
-  auto newButtonReadState = gpio_get(button_pin);
+  auto newButtonReadState = debounceButton.update();
 
   // If the button state has changed
-  if (newButtonReadState != buttonReadState) {
+  if (newButtonReadState) {
     // If the button is pressed
-    if (newButtonReadState == 0) {
+    if (debounceButton.getPressed()) {
       // Send a note on message
       sendNoteOn(60, 127, 0);
     } else {
       // Send a note off message
       sendNoteOff(60, 127, 0);
     }
-
-    buttonReadState = newButtonReadState;
   }
 }
 

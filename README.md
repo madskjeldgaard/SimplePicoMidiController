@@ -2,6 +2,8 @@
 
 A simple Raspberry Pi Pico based midi controller that uses the Pico-SDK to make a simple midi controller that reads a button and sends out a midi note when that button is pressed.
 
+The project includes a simple Debounce library that will debounce the button presses to remove jitter.
+
 It expects the button to be connected to pin 1 (GP0) and pin3 (GND) but you can change this in the code.
 
 The project also includes a simple SuperCollider script set up to receive midi notes from this controller and play a synth accordingly.
