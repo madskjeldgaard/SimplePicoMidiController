@@ -1,4 +1,4 @@
-# Big Blinking Button
+# Simple Raspberry Pi Pico Midi Controller
 
 A simple Raspberry Pi Pico based midi controller that uses the Pico-SDK to make a simple midi controller that reads a button and sends out a midi note when that button is pressed.
 
