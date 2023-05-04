@@ -50,8 +50,7 @@ project(BigBlinkingButton C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-add_executable(
-  BigBlinkingButton BigBlinkingButton.cpp usb_descriptors.c)
+add_executable(BigBlinkingButton BigBlinkingButton.cpp usb_descriptors.c)
 
 pico_set_program_name(BigBlinkingButton "BigBlinkingButton")
 pico_set_program_version(BigBlinkingButton "0.1")
@@ -68,9 +67,7 @@ target_include_directories(
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}
           ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other
                                        # standard includes, if required
-          ${CMAKE_SOURCE_DIR}/include
-          ${CMAKE_SOURCE_DIR}/include/button
-		  )
+          ${CMAKE_SOURCE_DIR}/include)
 
 # Add any user requested libraries
 target_link_libraries(BigBlinkingButton tinyusb_device tinyusb_board)

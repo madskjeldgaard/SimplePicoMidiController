@@ -1,6 +1,5 @@
 #include "bsp/board.h"
 #include "hardware/gpio.h"
-#include "include/DebounceButton.hpp"
 #include "pico/stdlib.h"
 
 #include "tusb.h"
@@ -57,7 +56,7 @@ void buttonReadTask() {
       sendNoteOff(60, 127, 0);
     }
 
-	buttonReadState = newButtonReadState;
+    buttonReadState = newButtonReadState;
   }
 }
 
