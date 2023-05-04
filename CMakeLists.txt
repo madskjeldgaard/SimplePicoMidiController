@@ -8,30 +8,6 @@ set(CMAKE_CXX_STANDARD 17)
 # Export compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Add CPM support for package management Add CPM
-set(CPM_DOWNLOAD_VERSION 0.36.0)
-set(CPM_DOWNLOAD_LOCATION
-    "${CMAKE_BINARY_DIR}/cmake/CPM_${CPM_DOWNLOAD_VERSION}.cmake")
-
-if(NOT (EXISTS ${CPM_DOWNLOAD_LOCATION}))
-  message(STATUS "Downloading CPM.cmake")
-  file(
-    DOWNLOAD
-    https://github.com/TheLartians/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake
-    ${CPM_DOWNLOAD_LOCATION})
-endif()
-
-include(${CPM_DOWNLOAD_LOCATION})
-
-# cpmaddpackage(NAME picosdkpackage GITHUB_REPOSITORY "raspberrypi/pico-sdk"
-# GIT_TAG 1.5.0)
-
-cpmaddpackage(NAME rp2040button GITHUB_REPOSITORY "TuriSc/RP2040-Button")
-
-# Initialise pico_sdk from installed location (note this can come from
-# environment, CMake cache etc) set(PICO_SDK_PATH ${picosdkpackage_SOURCE_DIR})
-set(PICO_SDK_PATH "~/picosdk")
-
 message(STATUS "PICO_SDK_PATH: ${PICO_SDK_PATH}")
 
 set(PICO_BOARD
@@ -40,10 +16,6 @@ set(PICO_BOARD
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
-#
-# if(PICO_SDK_VERSION_STRING VERSION_LESS "1.4.0") message( FATAL_ERROR
-# "Raspberry Pi Pico SDK version 1.4.0 (or later) required. Your version is
-# ${PICO_SDK_VERSION_STRING}" ) endif()
 
 project(BigBlinkingButton C CXX ASM)
 
