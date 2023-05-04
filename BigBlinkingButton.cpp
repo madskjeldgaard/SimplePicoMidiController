@@ -66,6 +66,11 @@ int main() {
   stdio_init_all();
   tusb_init();
 
+  // Setup button pin
+  gpio_init(button_pin);
+  gpio_set_dir(button_pin, GPIO_IN);
+  gpio_pull_up(button_pin);
+
   while (true) {
     buttonReadTask();
     tud_task(); // tinyusb device task
