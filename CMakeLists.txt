@@ -48,6 +48,11 @@ include(${CPM_DOWNLOAD_LOCATION})
 CPMAddPackage("gh:madskjeldgaard/PicoDebounceButton#main")
 target_link_libraries(SimplePicoMidiController PicoDebounceButton::PicoDebounceButton)
 
+# Add PicoResponsiveAnalogRead
+CPMAddPackage("gh:madskjeldgaard/PicoResponsiveAnalogRead#main")
+target_link_libraries(SimplePicoMidiController PicoResponsiveAnalogRead::PicoResponsiveAnalogRead)
+target_link_libraries(SimplePicoMidiController hardware_adc) # Dependency for PicoResponsiveAnalogRead
+
 # Add the standard include files to the build
 target_include_directories(
   SimplePicoMidiController
