@@ -1,6 +1,6 @@
 #include "bsp/board.h"
 #include "hardware/gpio.h"
-#include "include/DebounceButton.hpp"
+#include "PicoDebounceButton/PicoDebounceButton.hpp"
 #include "pico/stdlib.h"
 
 #include "tusb.h"
@@ -10,7 +10,7 @@
 // Setup Pin 1 as an input
 constexpr auto button_pin = 0;
 auto debounceButton =
-    PicoDebounceButton(button_pin, 10, PicoDebounceButton::PRESSED, false);
+    picodebounce::PicoDebounceButton(button_pin, 10, picodebounce::PicoDebounceButton::PRESSED, false);
 
 // Midi buffer
 constexpr auto buffer_size = 3;

@@ -33,6 +33,21 @@ pico_enable_stdio_usb(SimplePicoMidiController 0)
 # Add the standard library to the build
 target_link_libraries(SimplePicoMidiController pico_stdlib)
 
+# Install CPM if not already installed
+set(CPM_DOWNLOAD_VERSION 0.38.1)
+set(CPM_DOWNLOAD_LOCATION "${CMAKE_BINARY_DIR}/cmake/CPM_${CPM_DOWNLOAD_VERSION}.cmake")
+
+if(NOT (EXISTS ${CPM_DOWNLOAD_LOCATION}))
+	message(STATUS "Downloading CPM.cmake")
+	file(DOWNLOAD https://github.com/TheLartians/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake ${CPM_DOWNLOAD_LOCATION})
+endif()
+
+include(${CPM_DOWNLOAD_LOCATION})
+
+# Add Debounce
+CPMAddPackage("gh:madskjeldgaard/PicoDebounceButton#main")
+target_link_libraries(SimplePicoMidiController PicoDebounceButton::PicoDebounceButton)
+
 # Add the standard include files to the build
 target_include_directories(
   SimplePicoMidiController
