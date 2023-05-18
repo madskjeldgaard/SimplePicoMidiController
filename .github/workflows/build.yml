@@ -21,7 +21,7 @@ jobs:
           repository: 'pico-sdk'
 
       - name: Configure CMake
-        run: export PICO_SDK_PATH=pico-sdk; cmake -B ${{github.workspace}}/build -S .
+        run: export PICO_SDK_PATH="${{github.workspace}}/pico-sdk"; cmake -B ${{github.workspace}}/build -S .
 
       - name: Build
         # Build your program with the given configuration
