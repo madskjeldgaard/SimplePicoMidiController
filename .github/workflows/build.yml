@@ -15,10 +15,7 @@ jobs:
 
       # Get Raspberry Pi Pico SDK
       - name: Clone Raspberry Pi Pico SDK
-        uses: GuillaumeFalourd/clone-github-repo-action@v2
-        with:
-          owner: 'raspberrypi'
-          repository: 'pico-sdk'
+        run: git clone https://github.com/raspberrypi/pico-sdk ${{github.workspace}}/pico-sdk
 
       - name: Configure CMake
         run: export PICO_SDK_PATH="${{github.workspace}}/pico-sdk"; cmake -B ${{github.workspace}}/build -S .
