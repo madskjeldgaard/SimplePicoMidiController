@@ -1,6 +1,7 @@
 #include "bsp/board.h"
 #include "hardware/gpio.h"
 #include "PicoDebounceButton/PicoDebounceButton.hpp"
+#include "PicoResponsiveAnalogRead/PicoResponsiveAnalogRead.hpp"
 #include "pico/stdlib.h"
 
 #include "tusb.h"
