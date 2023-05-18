@@ -10,6 +10,10 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+
+      - name: Install dependencies
+        run: sudo apt update && sudo apt install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential libstdc++-arm-none-eabi-newlib
+
       - name: Checkout
         uses: actions/checkout@v2
 
