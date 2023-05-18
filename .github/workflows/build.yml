@@ -19,7 +19,7 @@ jobs:
 
       # Get Raspberry Pi Pico SDK
       - name: Clone Raspberry Pi Pico SDK
-        run: git clone https://github.com/raspberrypi/pico-sdk ${{github.workspace}}/pico-sdk
+        run: git clone --recurse-submodules https://github.com/raspberrypi/pico-sdk ${{github.workspace}}/pico-sdk
 
       - name: Configure CMake
         run: export PICO_SDK_PATH="${{github.workspace}}/pico-sdk"; cmake -B ${{github.workspace}}/build -S .
