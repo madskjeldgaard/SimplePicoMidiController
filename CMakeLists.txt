@@ -1,11 +1,4 @@
 # if PICO_SDK_PATH isn't defined, do not proceed
-if(NOT DEFINED PICO_SDK_PATH)
-  message(
-	FATAL_ERROR
-	  "PICO_SDK_PATH is not defined. Please define PICO_SDK_PATH to point to the location of the Pico SDK."
-  )
-endif()
-
 message(STATUS "PICO_SDK_PATH: ${PICO_SDK_PATH}")
 
 cmake_minimum_required(VERSION 3.13)
