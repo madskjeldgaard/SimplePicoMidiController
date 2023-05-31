@@ -36,7 +36,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(cmake/pico_sdk_import.cmake)
 project(SimplePicoMidiController CXX C ASM)
 pico_sdk_init()
-add_executable(SimplePicoMidiController SimplePicoMidiController.cpp usb_descriptors.c)
+add_executable(SimplePicoMidiController SimplePicoMidiController.cpp
+                                        usb_descriptors.c)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_set_program_name(SimplePicoMidiController SimplePicoMidiController)
@@ -61,16 +62,8 @@ target_link_libraries(SimplePicoMidiController pico_stdlib tinyusb_device
 # CPM Packages
 # ##############################################################################
 
-# Add the pico sdk as a CPM package
-# cpmaddpackage(
-#   NAME
-#   pico-sdk
-#   GITHUB_REPOSITORY
-#   raspberrypi/pico-sdk
-#   GIT_TAG
-#   master
-#   VERSION
-#   1.5.0)
+# Add the pico sdk as a CPM package cpmaddpackage( NAME pico-sdk
+# GITHUB_REPOSITORY raspberrypi/pico-sdk GIT_TAG master VERSION 1.5.0)
 
 # Add Debounce
 cpmaddpackage("gh:madskjeldgaard/PicoDebounceButton#main")
@@ -81,3 +74,15 @@ target_link_libraries(SimplePicoMidiController
 cpmaddpackage("gh:madskjeldgaard/PicoResponsiveAnalogRead#main")
 target_link_libraries(SimplePicoMidiController
                       PicoResponsiveAnalogRead::PicoResponsiveAnalogRead)
+
+# Add PicoOSC option
+option(USE_PICO_OSC "Use PicoOSC" ON)
+
+# Only add PicoOSC if the USE_PICO_OSC flag is on
+if(USE_PICO_OSC)
+  # Add PicoOSC
+  cpmaddpackage("gh:madskjeldgaard/PicoOSC#main")
+  target_link_libraries(
+    SimplePicoMidiController PicoOSC pico_cyw43_arch_lwip_threadsafe_background
+    pico_lwip_nosys)
+endif()

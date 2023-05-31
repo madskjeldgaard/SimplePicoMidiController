@@ -2,6 +2,7 @@
 #include "hardware/gpio.h"
 #include "PicoDebounceButton/PicoDebounceButton.hpp"
 #include "PicoResponsiveAnalogRead/PicoResponsiveAnalogRead.hpp"
+#include "PicoOSC/PicoOSC.hpp"
 #include "pico/stdlib.h"
 
 #include "tusb.h"
